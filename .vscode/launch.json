@@ -1,0 +1,61 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "servico_produtos (porta 5001)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_produtos/app.py",
+      "cwd": "${workspaceFolder}/servico_produtos",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "servico_clientes (porta 5002)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_clientes/app.py",
+      "cwd": "${workspaceFolder}/servico_clientes",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "servico_vendedores (porta 5003)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_vendedores/app.py",
+      "cwd": "${workspaceFolder}/servico_vendedores",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "name": "servico_vendas (porta 5004)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/servico_vendas/app.py",
+      "cwd": "${workspaceFolder}/servico_vendas",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Iniciar os 4 serviços",
+      "configurations": [
+        "servico_produtos (porta 5001)",
+        "servico_clientes (porta 5002)",
+        "servico_vendedores (porta 5003)",
+        "servico_vendas (porta 5004)"
+      ],
+      "stopAll": true
+    }
+  ]
+}

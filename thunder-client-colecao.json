@@ -1,0 +1,686 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "Projeto - Pet Shop (microsservicos)",
+  "collectionId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+  "dateExported": "2026-11-06T20:00:00.000Z",
+  "version": "1.2",
+  "folders": [
+    {
+      "_id": "11111111-1111-1111-1111-111111111101",
+      "name": "servico_produtos (porta 5001)",
+      "containerId": "",
+      "created": "2026-11-06T20:00:00.000Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "22222222-2222-2222-2222-222222222202",
+      "name": "servico_clientes (porta 5002)",
+      "containerId": "",
+      "created": "2026-11-06T20:00:00.000Z",
+      "sortNum": 20000
+    },
+    {
+      "_id": "33333333-3333-3333-3333-333333333303",
+      "name": "servico_vendedores (porta 5003)",
+      "containerId": "",
+      "created": "2026-11-06T20:00:00.000Z",
+      "sortNum": 30000
+    },
+    {
+      "_id": "44444444-4444-4444-4444-444444444404",
+      "name": "servico_vendas (porta 5004)",
+      "containerId": "",
+      "created": "2026-11-06T20:00:00.000Z",
+      "sortNum": 40000
+    },
+    {
+      "_id": "55555555-5555-5555-5555-555555555505",
+      "name": "Integrações (servico_vendas chama os outros servicos)",
+      "containerId": "",
+      "created": "2026-11-06T20:00:00.000Z",
+      "sortNum": 50000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "10101010-0001-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Health",
+      "url": "http://127.0.0.1:5001/api/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "10101010-0002-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Criar produto",
+      "url": "http://127.0.0.1:5001/api/produtos",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"Ração Premium 10kg\",\n  \"categoria\": \"Ração\",\n  \"preco\": 89.90,\n  \"estoque\": 20\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "10101010-0003-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Listar produtos",
+      "url": "http://127.0.0.1:5001/api/produtos",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "10101010-0004-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Buscar produto 1",
+      "url": "http://127.0.0.1:5001/api/produtos/1",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "10101010-0005-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Atualizar produto 1",
+      "url": "http://127.0.0.1:5001/api/produtos/1",
+      "method": "PUT",
+      "sortNum": 50000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"Ração Premium 10kg\",\n  \"categoria\": \"Ração\",\n  \"preco\": 99.90,\n  \"estoque\": 20\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "10101010-0006-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Inativar produto 1",
+      "url": "http://127.0.0.1:5001/api/produtos/1/inativar",
+      "method": "PATCH",
+      "sortNum": 60000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "10101010-0007-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Está ativo? produto 1",
+      "url": "http://127.0.0.1:5001/api/produtos/1/ativo",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "10101010-0008-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Baixar estoque produto 1",
+      "url": "http://127.0.0.1:5001/api/produtos/1/baixar-estoque",
+      "method": "PATCH",
+      "sortNum": 80000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"quantidade\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "10101010-0009-0001-0001-000000000101",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "11111111-1111-1111-1111-111111111101",
+      "name": "Repor estoque produto 1",
+      "url": "http://127.0.0.1:5001/api/produtos/1/repor-estoque",
+      "method": "PATCH",
+      "sortNum": 90000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"quantidade\": 5\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "20202020-0001-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Health",
+      "url": "http://127.0.0.1:5002/api/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "20202020-0002-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Criar cliente",
+      "url": "http://127.0.0.1:5002/api/clientes",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome_tutor\": \"Ana Silva\",\n  \"nome_pet\": \"Rex\",\n  \"especie\": \"Cachorro\",\n  \"telefone\": \"11 9999-0001\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "20202020-0003-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Listar clientes",
+      "url": "http://127.0.0.1:5002/api/clientes",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "20202020-0004-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Buscar cliente 1",
+      "url": "http://127.0.0.1:5002/api/clientes/1",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "20202020-0005-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Atualizar cliente 1",
+      "url": "http://127.0.0.1:5002/api/clientes/1",
+      "method": "PUT",
+      "sortNum": 50000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome_tutor\": \"Ana Silva\",\n  \"nome_pet\": \"Rex\",\n  \"especie\": \"Cachorro\",\n  \"telefone\": \"11 9999-0001\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "20202020-0006-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Inativar cliente 1",
+      "url": "http://127.0.0.1:5002/api/clientes/1/inativar",
+      "method": "PATCH",
+      "sortNum": 60000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "20202020-0007-0002-0002-000000000202",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "22222222-2222-2222-2222-222222222202",
+      "name": "Está ativo? cliente 1",
+      "url": "http://127.0.0.1:5002/api/clientes/1/ativo",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "30303030-0001-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Health",
+      "url": "http://127.0.0.1:5003/api/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "30303030-0002-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Criar vendedor",
+      "url": "http://127.0.0.1:5003/api/vendedores",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"Mariana Alves\",\n  \"turno\": \"manha\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "30303030-0003-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Listar vendedores",
+      "url": "http://127.0.0.1:5003/api/vendedores",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "30303030-0004-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Buscar vendedor 1",
+      "url": "http://127.0.0.1:5003/api/vendedores/1",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "30303030-0005-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Atualizar vendedor 1",
+      "url": "http://127.0.0.1:5003/api/vendedores/1",
+      "method": "PUT",
+      "sortNum": 50000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"nome\": \"Mariana Alves\",\n  \"turno\": \"tarde\"\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "30303030-0006-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Inativar vendedor 1",
+      "url": "http://127.0.0.1:5003/api/vendedores/1/inativar",
+      "method": "PATCH",
+      "sortNum": 60000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "30303030-0007-0003-0003-000000000303",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "33333333-3333-3333-3333-333333333303",
+      "name": "Está ativo? vendedor 1",
+      "url": "http://127.0.0.1:5003/api/vendedores/1/ativo",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "40404040-0001-0004-0004-000000000404",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "44444444-4444-4444-4444-444444444404",
+      "name": "Health",
+      "url": "http://127.0.0.1:5004/api/health",
+      "method": "GET",
+      "sortNum": 10000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "40404040-0002-0004-0004-000000000404",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "44444444-4444-4444-4444-444444444404",
+      "name": "Criar venda",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"produto_id\": 1,\n  \"vendedor_id\": 1,\n  \"quantidade\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "40404040-0003-0004-0004-000000000404",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "44444444-4444-4444-4444-444444444404",
+      "name": "Listar vendas",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "GET",
+      "sortNum": 30000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "40404040-0004-0004-0004-000000000404",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "44444444-4444-4444-4444-444444444404",
+      "name": "Buscar venda 1",
+      "url": "http://127.0.0.1:5004/api/vendas/1",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "40404040-0005-0004-0004-000000000404",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "44444444-4444-4444-4444-444444444404",
+      "name": "Atualizar vendedor da venda 1",
+      "url": "http://127.0.0.1:5004/api/vendas/1",
+      "method": "PUT",
+      "sortNum": 50000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"vendedor_id\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "40404040-0006-0004-0004-000000000404",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "44444444-4444-4444-4444-444444444404",
+      "name": "Cancelar venda 1",
+      "url": "http://127.0.0.1:5004/api/vendas/1/cancelar",
+      "method": "PATCH",
+      "sortNum": 60000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "50505050-0001-0005-0005-000000000505",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "55555555-5555-5555-5555-555555555505",
+      "name": "Integração - venda com sucesso",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"produto_id\": 1,\n  \"vendedor_id\": 1,\n  \"quantidade\": 2\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "50505050-0002-0005-0005-000000000505",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "55555555-5555-5555-5555-555555555505",
+      "name": "Integração - venda com estoque insuficiente",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"produto_id\": 1,\n  \"vendedor_id\": 1,\n  \"quantidade\": 1000\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "50505050-0003-0005-0005-000000000505",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "55555555-5555-5555-5555-555555555505",
+      "name": "Integração - venda com produto inativo (inativar o produto 1 antes)",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"produto_id\": 1,\n  \"vendedor_id\": 1,\n  \"quantidade\": 1\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "50505050-0004-0005-0005-000000000505",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "55555555-5555-5555-5555-555555555505",
+      "name": "Integração - consulta de venda com dados do cliente",
+      "url": "http://127.0.0.1:5004/api/vendas/1",
+      "method": "GET",
+      "sortNum": 40000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "50505050-0005-0005-0005-000000000505",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "55555555-5555-5555-5555-555555555505",
+      "name": "Integração - PRODUTOS indisponível (erro de validação: serviço fora do ar)",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "POST",
+      "sortNum": 50000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"produto_id\": 1,\n  \"vendedor_id\": 1,\n  \"quantidade\": 1\n}",
+        "form": []
+      }
+    },
+    {
+      "_id": "50505050-0006-0005-0005-000000000505",
+      "colId": "243ea2e7-b26c-4fea-a82f-d9ea27c5df5a",
+      "containerId": "55555555-5555-5555-5555-555555555505",
+      "name": "Compensação (iniciar produtos com SIMULAR_FALHA_BAIXA=1)",
+      "url": "http://127.0.0.1:5004/api/vendas",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2026-11-06T20:00:00.000Z",
+      "modified": "2026-11-06T20:00:00.000Z",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "params": [],
+      "tests": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"cliente_id\": 1,\n  \"produto_id\": 1,\n  \"vendedor_id\": 1,\n  \"quantidade\": 1\n}",
+        "form": []
+      }
+    }
+  ]
+}
