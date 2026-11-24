@@ -13,7 +13,8 @@ def _ativo_ok(destino, caminho, nome_servico):
     resposta = integracao.chamar(destino, "GET", caminho)
     if resposta.status_code == 404:
         raise RegraDeNegocioError(f"{nome_servico} não encontrado.")
-    if not resposta.json().get("ativo"):
+    dados = integracao.ler_json(resposta, destino)
+    if not dados.get("ativo"):
         raise RegraDeNegocioError(f"{nome_servico} está inativo.")
     return True
 
@@ -43,7 +44,7 @@ def criar(dados):
     resposta_produto = integracao.chamar("PRODUTOS", "GET", f"/api/produtos/{produto_id}")
     if resposta_produto.status_code == 404:
         raise RegraDeNegocioError("Produto não encontrado.")
-    produto = resposta_produto.json()
+    produto = integracao.ler_json(resposta_produto, "PRODUTOS")
     if not produto.get("ativo"):
         raise RegraDeNegocioError("O produto está inativo.")
     if produto.get("estoque", 0) < quantidade:
@@ -69,11 +70,13 @@ def criar(dados):
                                            f"/api/produtos/{produto_id}/baixar-estoque",
                                            json={"quantidade": quantidade})
         if resposta_baixa.status_code != 200:
-            corpo = resposta_baixa.json()
-            erro_json = corpo.get("erro", "")
-            raise Exception(f"resposta {resposta_baixa.status_code} do serviço PRODUTOS: {erro_json}")
-    except Exception as falha:
-        # Compensação: desfaz a venda porque a baixa de estoque falhou.
+            try:
+                corpo = integracao.ler_json(resposta_baixa, "PRODUTOS")
+                erro_json = corpo.get("erro", "")
+            except RegraDeNegocioError:
+                erro_json = ""
+            raise RegraDeNegocioError(f"resposta {resposta_baixa.status_code} do serviço PRODUTOS: {erro_json}")
+    except RegraDeNegocioError as falha:
         venda_para_apagar = db.session.get(Venda, venda_id)
         if venda_para_apagar is not None:
             db.session.delete(venda_para_apagar)
@@ -114,7 +117,7 @@ def buscar_detalhes(venda_id):
     try:
         resposta = integracao.chamar("CLIENTES", "GET", f"/api/clientes/{venda.cliente_id}")
         if resposta.status_code == 200:
-            cliente = resposta.json()
+            cliente = integracao.ler_json(resposta, "CLIENTES")
             resultado["cliente"] = {
                 "nome_tutor": cliente.get("nome_tutor"),
                 "nome_pet": cliente.get("nome_pet"),
@@ -165,9 +168,12 @@ def cancelar(venda_id):
                                      f"/api/produtos/{venda.produto_id}/repor-estoque",
                                      json={"quantidade": venda.quantidade})
         if resposta.status_code != 200:
-            corpo = resposta.json()
-            erro_json = corpo.get("erro", "")
-            raise Exception(f"resposta {resposta.status_code} do serviço PRODUTOS: {erro_json}")
+            try:
+                corpo = integracao.ler_json(resposta, "PRODUTOS")
+                erro_json = corpo.get("erro", "")
+            except RegraDeNegocioError:
+                erro_json = ""
+            raise RegraDeNegocioError(f"resposta {resposta.status_code} do serviço PRODUTOS: {erro_json}")
     except Exception as falha:
         # Não cancelar: volta o status para concluída e avisa.
         venda.status = "concluida"

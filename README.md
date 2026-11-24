@@ -19,7 +19,7 @@ Sistema de pet shop dividido em 4 microsserviços independentes que se comunicam
 6. O sistema deve permitir consultar uma venda e ver os dados do cliente embutidos (nome do tutor, nome do pet e espécie).
 7. O sistema deve permitir alterar apenas o vendedor de uma venda existente.
 8. O sistema deve permitir cancelar uma venda, repondo o estoque do produto; se a reposição falhar, a venda não é cancelada.
-9. Se o serviço de produtos estiver fora do ar ao registrar uma venda, a venda é desfeita (compensação) e um erro claro é devolvido.
+9. Se a baixa de estoque falhar depois de a venda ser salva (serviço fora do ar, timeout ou erro), a venda é desfeita (compensação) e um erro claro é devolvido. Se o serviço de produtos já estiver fora do ar na validação, a venda nem é salva e o erro claro é devolvido.
 10. Cada serviço deve criar dados de exemplo automaticamente quando o seu banco estiver vazio.
 
 ## Descritivo técnico
@@ -39,6 +39,8 @@ Sistema de pet shop dividido em 4 microsserviços independentes que se comunicam
 | 2 | Busca (GET) | servico_vendas | servico_produtos, servico_clientes, servico_vendedores | GET /api/produtos/<id>, GET /api/clientes/<id>/ativo, GET /api/vendedores/<id>/ativo | Antes de salvar a venda, valida que produto, cliente e vendedor existem e estão ativos, que o estoque é suficiente, pega o preço do produto e calcula o total. |
 | 3 | Alteração (PATCH) | servico_vendas | servico_produtos | PATCH /api/produtos/<id>/baixar-estoque | Depois de salvar a venda, baixa o estoque. Se falhar (fora do ar, timeout ou resposta diferente de 200), apaga a venda (compensação) e devolve erro claro. |
 | Extra | Alteração (PATCH) | servico_vendas | servico_produtos | PATCH /api/produtos/<id>/repor-estoque | Ao cancelar uma venda, repõe o estoque. Se falhar, a venda não é cancelada. |
+42: 
+43: As chamadas GET possuem retry (2 tentativas) em caso de falha de conexão ou timeout. URLs mal configuradas (sem https://, com barra final etc.) e respostas que não sejam JSON são tratadas com mensagem de erro clara.
 
 ## Como executar
 
@@ -75,6 +77,25 @@ $env:SIMULAR_FALHA_BAIXA="1"
 python servico_produtos/app.py
 ```
 
+## Publicação no Render
+
+| Serviço | URL |
+|---|---|
+| servico_produtos | https://petshop-produtos.onrender.com |
+| servico_clientes | https://petshop-clientes.onrender.com |
+| servico_vendedores | https://servico-vendedores.onrender.com |
+| servico_vendas | https://servico-vendas.onrender.com |
+
+Teste de saúde de cada serviço: `GET <URL>/api/health`.
+
+No `servico_vendas` as variáveis de ambiente são `PRODUTOS_URL`, `CLIENTES_URL` e `VENDEDORES_URL` (com `https://`, sem barra no final). Os outros três não precisam de variáveis de ambiente.
+
+Avisos do plano gratuito: o serviço hiberna após ~15 min de inatividade e leva cerca de 1 minuto para acordar (chame `/api/health` antes de usar); o banco SQLite é apagado ao reiniciar/hibernar (dados de exemplo são recriados, vendas somem).
+
+## Repositório
+
+https://github.com/AndreyHenrique1/ProjetoArquiteturaSoftware
+
 ## Autor
 
-> Andrey Henrique João
+Andrey Henrique João

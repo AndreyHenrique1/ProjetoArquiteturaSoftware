@@ -1,5 +1,7 @@
 """Rotas do serviço PRODUTOS. Só recebe a requisição e chama as regras."""
 
+import os
+
 from flask import Blueprint, jsonify, request
 
 import regras
@@ -52,8 +54,6 @@ def esta_ativo(produto_id):
 @rotas.patch("/produtos/<int:produto_id>/baixar-estoque")
 def baixar_estoque(produto_id):
     """Baixa o estoque. Se SIMULAR_FALHA_BAIXA=1, devolve 500 sem mexer no estoque."""
-    import os
-
     if os.environ.get("SIMULAR_FALHA_BAIXA") == "1":
         return jsonify(erro="falha simulada"), 500
     dados = request.get_json(silent=True) or {}
