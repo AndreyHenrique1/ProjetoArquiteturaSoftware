@@ -39,8 +39,8 @@ Sistema de pet shop dividido em 4 microsserviços independentes que se comunicam
 | 2 | Busca (GET) | servico_vendas | servico_produtos, servico_clientes, servico_vendedores | GET /api/produtos/<id>, GET /api/clientes/<id>/ativo, GET /api/vendedores/<id>/ativo | Antes de salvar a venda, valida que produto, cliente e vendedor existem e estão ativos, que o estoque é suficiente, pega o preço do produto e calcula o total. |
 | 3 | Alteração (PATCH) | servico_vendas | servico_produtos | PATCH /api/produtos/<id>/baixar-estoque | Depois de salvar a venda, baixa o estoque. Se falhar (fora do ar, timeout ou resposta diferente de 200), apaga a venda (compensação) e devolve erro claro. |
 | Extra | Alteração (PATCH) | servico_vendas | servico_produtos | PATCH /api/produtos/<id>/repor-estoque | Ao cancelar uma venda, repõe o estoque. Se falhar, a venda não é cancelada. |
-42: 
-43: As chamadas GET possuem retry (2 tentativas) em caso de falha de conexão ou timeout. URLs mal configuradas (sem https://, com barra final etc.) e respostas que não sejam JSON são tratadas com mensagem de erro clara.
+
+As chamadas GET possuem retry (2 tentativas) em caso de falha de conexão ou timeout. URLs mal configuradas (sem https://, com barra final etc.) e respostas que não sejam JSON são tratadas com mensagem de erro clara.
 
 ## Como executar
 
